@@ -1,0 +1,27 @@
+[
+  {
+    "content": "Analyze recent code changes for bugs",
+    "activeForm": "Analyzing recent code changes for bugs",
+    "status": "completed"
+  },
+  {
+    "content": "Identify critical issues in main_async.py loop",
+    "activeForm": "Identifying critical issues in main_async.py loop",
+    "status": "completed"
+  },
+  {
+    "content": "Check intent_router.py for authentication bugs",
+    "activeForm": "Checking intent_router.py for authentication bugs",
+    "status": "completed"
+  },
+  {
+    "content": "Verify listener.py tuple return handling",
+    "activeForm": "Verifying listener.py tuple return handling",
+    "status": "completed"
+  },
+  {
+    "content": "Provide fix recommendations",
+    "activeForm": "Providing fix recommendations",
+    "status": "in_progress"
+  }
+]

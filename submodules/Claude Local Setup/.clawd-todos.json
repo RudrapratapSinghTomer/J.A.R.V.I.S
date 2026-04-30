@@ -1,0 +1,42 @@
+[
+  {
+    "content": "Fix all JavaScript bugs (event parameter, button handlers)",
+    "activeForm": "Fixing all JavaScript bugs (event parameter, button handlers)",
+    "status": "in_progress"
+  },
+  {
+    "content": "Add floating petals/particles effect",
+    "activeForm": "Adding floating petals/particles effect",
+    "status": "pending"
+  },
+  {
+    "content": "Add vibe check meter",
+    "activeForm": "Adding vibe check meter",
+    "status": "pending"
+  },
+  {
+    "content": "Make content more playful and fun",
+    "activeForm": "Making content more playful and fun",
+    "status": "pending"
+  },
+  {
+    "content": "Add aesthetic Spider-Man theme (pink/purple glow)",
+    "activeForm": "Adding aesthetic Spider-Man theme (pink/purple glow)",
+    "status": "pending"
+  },
+  {
+    "content": "Fix music player with working Spider-Man video",
+    "activeForm": "Fixing music player with working Spider-Man video",
+    "status": "pending"
+  },
+  {
+    "content": "Add animated emojis that float around",
+    "activeForm": "Adding animated emojis that float around",
+    "status": "pending"
+  },
+  {
+    "content": "Add aesthetic quote cards",
+    "activeForm": "Adding aesthetic quote cards",
+    "status": "pending"
+  }
+]

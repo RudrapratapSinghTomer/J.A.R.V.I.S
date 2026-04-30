@@ -1,0 +1,70 @@
+# ===========================================================
+# J.A.R.V.I.S — Hermes Agent Configuration
+# ===========================================================
+# Place at: ~/.hermes/config.yaml  (or keep here as reference)
+#
+# Hermes uses this to connect to:
+#   - Local Ollama LLM (Gemma2, zero cloud)
+#   - Cognee memory (single source of truth)
+#   - Ruflo MCP tools
+#   - Telegram gateway
+#
+# Install Hermes first:
+#   curl -fsSL https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.sh | bash
+# ===========================================================
+
+# --- LLM Configuration (local only, zero billing) ---
+model:
+  provider: ollama
+  model: qwen3.5:397b-cloud # Your local Qwen via Ollama
+  base_url: http://localhost:11434
+  # For custom weights: change model to 'jarvis-gemma' after ollama create
+
+  # --- Memory Configuration ---
+  # IMPORTANT: Cognee is the ONLY memory store.
+  # Hermes' built-in Honcho memory is DISABLED to avoid duplication.
+memory:
+  provider: cognee
+  db_path: /home/rudrapratap/Desktop/J.A.R.V.I.S/data/cognee_db
+  # Do NOT enable honcho or any other memory provider
+
+  # --- Tool Servers (MCP) ---
+tools:
+  mcp_servers:
+    - name: jarvis-system
+      command: python
+      args: [ "-m", "tools.system_mcp" ]
+      cwd: /home/rudrapratap/Desktop/J.A.R.V.I.S
+
+# --- Gateway (Telegram) ---
+gateway:
+  telegram:
+    enabled: true
+    token: "${TELEGRAM_BOT_TOKEN}"
+    allowed_users:
+      - "${TELEGRAM_ALLOWED_USERS}"
+
+# --- Skills ---
+skills:
+  auto_improve: true # Enable self-improving skill loop
+  skill_dir: /home/rudrapratap/Desktop/J.A.R.V.I.S/skills
+
+# --- Scheduling (IST night jobs) ---
+cron:
+  - name: autonomous_learning
+    schedule: "30 19 * * *" # 1:00 AM IST = 19:30 UTC
+    command: python -m skills.autonomous_learner
+    cwd: /home/rudrapratap/Desktop/J.A.R.V.I.S
+
+  - name: security_scan
+    schedule: "30 20 * * *" # 2:00 AM IST = 20:30 UTC
+    command: bash scripts/security_scan.sh
+    cwd: /home/rudrapratap/Desktop/J.A.R.V.I.S
+
+# --- Safety ---
+safety:
+  max_tool_calls_per_turn: 10
+  require_confirmation_for:
+    - file_delete
+    - system_command
+    - network_request

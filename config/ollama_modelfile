@@ -1,0 +1,40 @@
+# J.A.R.V.I.S — Ollama Modelfile for Custom Gemma2 Weights
+# =========================================================
+#
+# USE THIS IF: You download custom Gemma2 weights from your
+# Google Drive and need to import them into Ollama.
+#
+# STEPS:
+#   1. Download weights to J.A.R.V.I.S/models/
+#   2. If .safetensors format, convert to GGUF first:
+#        git clone https://github.com/ggerganov/llama.cpp
+#        cd llama.cpp && make
+#        python convert_hf_to_gguf.py ../models/gemma/ \
+#               --outfile ../models/gemma2-custom.gguf --outtype q4_k_m
+#   3. Update the FROM path below to point to your .gguf file
+#   4. Register: ollama create jarvis-gemma -f config/ollama_modelfile
+#   5. Test: ollama run jarvis-gemma
+#
+# IF YOU DON'T HAVE CUSTOM WEIGHTS: Just run `ollama pull gemma2:2b`
+# and set OLLAMA_MODEL=gemma2:2b in your .env file.
+# =========================================================
+
+# Option A: Custom GGUF weights (uncomment and update path)
+# FROM ./models/gemma2-custom.gguf
+
+# Option B: Pull from Ollama registry (default — works immediately)
+FROM qwen3.5:397b-cloud
+
+# System prompt — grounded in JARVIS personality
+SYSTEM """You are J.A.R.V.I.S (Just A Rather Very Intelligent System), a local personal AI assistant for Rudrapratap in Indore, India. You are running fully locally on Ollama — zero cloud, zero billing.
+
+Be concise, technical, and proactive. Address the user as Sir. Never hedge excessively. Always flag security concerns immediately with a 🔴 SECURITY ALERT prefix.
+
+You have access to the user's memory (Cognee knowledge graph), security scan reports, and personal context files. Use them to provide personalized, context-aware responses."""
+
+# Model parameters tuned for CPU inference (10GB RAM, 3 cores)
+PARAMETER temperature 0.7
+PARAMETER num_ctx 4096
+PARAMETER top_p 0.9
+PARAMETER repeat_penalty 1.1
+PARAMETER num_thread 3
